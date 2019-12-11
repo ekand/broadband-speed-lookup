@@ -1,3 +1,3 @@
-this is Erik's text in the readme  
+The purpose of this website is to interpret and display internet connectivity data from an FCC database.
 
-Now, this is an edit that only erik will see.
+Contributors: Adam Gene Regnier, Erik Kristofer Anderson
