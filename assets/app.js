@@ -11,7 +11,7 @@ try {
 
         if (Name.value == "" || Address.value == "" || Email.value == "" || Phone.value == ""|| Comment.value == ""){
             document.getElementById("danger-alert").classList.remove("d-none");
-        //
+
         } else {
             const form = document.getElementById("contact");
             const method = form.getAttribute("method");
