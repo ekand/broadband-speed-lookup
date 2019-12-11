@@ -21,6 +21,8 @@ try {
 
         if (Name.value === "" || Address.value === "" || Email.value === "" || Phone.value === ""|| Comment.value === ""){
             document.getElementById("danger-alert").classList.remove("d-none");
+            document.getElementById("warning-alert").classList.add("d-none");
+            document.getElementById("success-alert").classList.add("d-none");
 
         } else {
             // const form = document.getElementById("contact");
@@ -49,9 +51,11 @@ try {
                     if (response.status >= 200 && response.status < 300) {
                         document.getElementById("success-alert").classList.remove("d-none");
                         document.getElementById("danger-alert").classList.add("d-none");
+                        document.getElementById("warning-alert").classList.add("d-none");
                     } else {
                         document.getElementById("warning-alert").classList.remove("d-none");
                         document.getElementById("success-alert").classList.add("d-none");
+                        document.getElementById("danger-alert").classList.add("d-none");
                     }
                 });
         }
