@@ -1,5 +1,15 @@
+// debugger;
+
+
+
+//==============form submission code==================//
+
+// sources:
+// 1. https://jsfiddle.net/seamusleahy/rxeuaatw/
+// 2. https://www.geeksforgeeks.org/form-validation-using-html-javascript/
 let form = document.getElementById("contact")
 try {
+    // debugger;
     form.addEventListener('submit', e => {
         e.preventDefault();
 
@@ -48,4 +58,71 @@ try {
     });
 
 } catch (e) {
+    // debugger;
+}
+
+
+
+
+//============== code for displaying and retrieving internet speed data ===========//
+
+let searchButton = document.getElementById("searchButton");
+try {
+    searchButton.addEventListener("click", ev => {
+        let zipcode = document.getElementById("zipCodeEntry").value;
+        y = get_coordinates(zipcode);
+        alert(y);
+    });
+} catch (e) {
+}
+
+
+function get_coordinates(zipcode) {
+    let public_key = "pk.eyJ1IjoiZXJpa2thbmRlcnNvbiIsImEiOiJjazMxdnNqcmMwZGgzM2JzNXF5ZnM3MHhlIn0.RhbHx-zoZopJ_Xwx9iDbog";
+    let request_string = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + zipcode + ".json?access_token=" + public_key;
+    fetch(request_string)
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (data) {
+            let lat = data['features'][0]['center'][0];
+            let long = data['features'][0]['center'][1];
+            let coordinates = [lat, long];
+            get_blockcode(coordinates);
+        });
+
+}
+
+
+
+function get_blockcode(coordinates) {
+    let lat = coordinates[0];
+    let long = coordinates[1];
+    request_string = "https://geo.fcc.gov/api/census/block/find?longitude=" + lat + "&latitude=" + long + "&format=json&showall=false";
+    fetch(request_string)
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(data) {
+            let blockcode = data['Block']['FIPS'];
+            get_fastest(blockcode)
+        });
+}
+
+function get_fastest(blockcode) {
+    request_string = "https://opendata.fcc.gov/resource/ehbi-rr4z.json?blockcode=" + blockcode + "&consumer=1";
+    fetch(request_string)
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(data) {
+            let fastest = 0;
+            for (let i = 0; i < data.length; i++) {
+                let x = (parseFloat(data[i]['maxaddown']));
+                if  (x coordinates> fastest) {
+                    fastest = x
+                }
+            }
+            alert(fastest)
+        });
 }
