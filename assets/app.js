@@ -70,8 +70,7 @@ let searchButton = document.getElementById("searchButton");
 try {
     searchButton.addEventListener("click", ev => {
         let zipcode = document.getElementById("zipCodeEntry").value;
-        y = get_coordinates(zipcode);
-        alert(y);
+        get_coordinates(zipcode);
     });
 } catch (e) {
 }
@@ -105,9 +104,11 @@ function get_blockcode(coordinates) {
         })
         .then(function(data) {
             let blockcode = data['Block']['FIPS'];
+            // debugger;
             get_fastest(blockcode)
         });
 }
+
 
 function get_fastest(blockcode) {
     request_string = "https://opendata.fcc.gov/resource/ehbi-rr4z.json?blockcode=" + blockcode + "&consumer=1";
@@ -119,10 +120,16 @@ function get_fastest(blockcode) {
             let fastest = 0;
             for (let i = 0; i < data.length; i++) {
                 let x = (parseFloat(data[i]['maxaddown']));
-                if  (x coordinates> fastest) {
+                if  (x > fastest) {
                     fastest = x
                 }
             }
-            alert(fastest)
+            debugger;
+            displayResult(fastest);
+            debugger;
         });
+}
+
+function displayResult(fastest) {
+    document.getElementById("displayResult").innerText = fastest;
 }
