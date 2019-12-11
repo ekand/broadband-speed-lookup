@@ -68,35 +68,29 @@ try {
 
 let searchButton = document.getElementById("searchButton");
 try {
-    debugger;
     searchButton.addEventListener("click", ev => {
-        debugger;
-        let zipCodeEntry = document.getElementById("zipCodeEntry");
-        let zipcode = zipCodeEntry.getValue;
-        debugger;
-        zipcode = "60013";
-        get_coordinates(zipcode);
-        debugger;
+        let zipcode = document.getElementById("zipCodeEntry").value;
+        y = get_coordinates(zipcode);
+        alert(y);
     });
 } catch (e) {
-    // debugger;
 }
 
 
 function get_coordinates(zipcode) {
     let public_key = "pk.eyJ1IjoiZXJpa2thbmRlcnNvbiIsImEiOiJjazMxdnNqcmMwZGgzM2JzNXF5ZnM3MHhlIn0.RhbHx-zoZopJ_Xwx9iDbog";
     let request_string = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + zipcode + ".json?access_token=" + public_key;
-    debugger;
     fetch(request_string)
-        .then(function(response) {
+        .then(function (response) {
             return response.json()
         })
-        .then(function(data) {
+        .then(function (data) {
             let lat = data['features'][0]['center'][0];
             let long = data['features'][0]['center'][1];
             let coordinates = [lat, long];
             get_blockcode(coordinates);
         });
+
 }
 
 
@@ -111,7 +105,6 @@ function get_blockcode(coordinates) {
         })
         .then(function(data) {
             let blockcode = data['Block']['FIPS'];
-            // debugger;
             get_fastest(blockcode)
         });
 }
@@ -126,11 +119,10 @@ function get_fastest(blockcode) {
             let fastest = 0;
             for (let i = 0; i < data.length; i++) {
                 let x = (parseFloat(data[i]['maxaddown']));
-                if  (x > fastest) {
+                if  (x coordinates> fastest) {
                     fastest = x
                 }
             }
             alert(fastest)
-            debugger
         });
 }
