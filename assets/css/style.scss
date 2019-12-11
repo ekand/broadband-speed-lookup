@@ -2,12 +2,53 @@
  * Globals
  */
 
+$black-olive: #3F3E32;
+$wenge: #616157;
+$ebony: #595950;
+$nickel-color: #72705B;
+$pale-robin-egg-blue: #9AE2D7;
+$light-gray: #CCDDD3;
+$languid-lavender: #D6D5E5;
+
+
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+
+
 /* Links */
 a,
 a:focus,
 a:hover {
-    color: #fff;
+    color: $languid-lavender;
 }
+
+.make-dark-text {
+    color: $black-olive;
+}
+
+.jumbotron {
+    background-color: $nickel-color;
+}
+
+.alert {
+    margin-top: 10px;
+}
+
+
 
 /* Custom default button */
 .btn-secondary,
@@ -22,8 +63,6 @@ a:hover {
 /* carousel*/
 .carousel {
     margin-bottom: 4rem;
-    background-color: green;
-    text-decoraton-color: yellow;
 }
 
 .carousel-caption {

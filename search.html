@@ -15,38 +15,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-    <!-- Bootstrap core CSS -->
-    <link href="/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
-    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
-    <meta name="theme-color" content="#563d7c">
-
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
     <!-- Custom styles for this template -->
-    <link href="assets/style.css" rel="stylesheet">
+    <link href="build/style.min.css" rel="stylesheet">
 
 </head>
 
@@ -60,7 +31,6 @@
             <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link" href="index.html">Home</a>
                 <a class="nav-link active" href="search.html">Search</a>
-                <a class="nav-link" href="learn.html">Learn</a>
                 <a class="nav-link" href="contact.html">Contact</a>
             </nav>
         </div>
@@ -68,19 +38,26 @@
 
 
 
-
-
+    <label for="zipCodeEntry"> Please enter a Zip Code or Address and click search</label>
     <div class="input-group mb-3">
-        <input type="text" id="zipCodeEntry" class="form-control" placeholder="Enter your Zip Code" aria-label="Enter your Zip Code" aria-describedby="basic-addon2">
+
+        <input type="text" id="zipCodeEntry" class="form-control" aria-label="Enter your Zip Code" aria-describedby="basic-addon2">
         <div class="input-group-append">
             <a class="btn btn-outline-secondary"  id = "searchButton" role="button">Search </a>
-<!--            href="searchResults.html"  -->
+        </div>
+        <div class="container alerts">
+            <div class="alert alert-success d-none" id="success" role="alert">
+                <p id="displayResult"></p>
+                <button type="button" id="infoBtn"class="btn btn-info">Additional Information</button>
+            </div>
+            <div class="alert alert-danger d-none" id="danger" role="alert">
+                Please enter a zip code
+            </div>
+            <div class="alert alert-info d-none" id="info" role="alert">
+                <p id="displayAdditionalInfo"></p>
+            </div>
         </div>
     </div>
-
-    <p id="displayResult"></p>
-
-
 
 
 
@@ -98,9 +75,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
-
-<script src="assets/app.js"> </script>
+<script src="build/bundle.min.js"> </script>
 
 
 

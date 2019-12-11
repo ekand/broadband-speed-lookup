@@ -7,7 +7,7 @@
 // sources:
 // 1. https://jsfiddle.net/seamusleahy/rxeuaatw/
 // 2. https://www.geeksforgeeks.org/form-validation-using-html-javascript/
-let form = document.getElementById("contact")
+let form = document.getElementById("contact");
 try {
     // debugger;
     form.addEventListener('submit', e => {
@@ -19,20 +19,22 @@ try {
         let Phone = document.getElementById("Phone");
         let Comment = document.getElementById("Comment");
 
-        if (Name.value == "" || Address.value == "" || Email.value == "" || Phone.value == ""|| Comment.value == ""){
+        if (Name.value === "" || Address.value === "" || Email.value === "" || Phone.value === ""|| Comment.value === ""){
             document.getElementById("danger-alert").classList.remove("d-none");
+            document.getElementById("warning-alert").classList.add("d-none");
+            document.getElementById("success-alert").classList.add("d-none");
 
         } else {
-            const form = document.getElementById("contact");
-            const method = form.getAttribute("method");
-            const action = form.getAttribute("action");
+            // const form = document.getElementById("contact");
+            // const method = form.getAttribute("method");
+            // const action = form.getAttribute("action");
             let formEl = document.getElementById('contact');
             let headers = new Headers();
 
             headers.set('Accept', 'application/json');
 
-            var formData = new FormData();
-            for (var i = 0; i < formEl.length; ++i) {
+            let formData = new FormData();
+            for (let i = 0; i < formEl.length; ++i) {
                 formData.append(formEl[i].name, formEl[i].value);
             }
             formData.append('json', JSON.stringify({example: 'return value'}));
@@ -49,9 +51,11 @@ try {
                     if (response.status >= 200 && response.status < 300) {
                         document.getElementById("success-alert").classList.remove("d-none");
                         document.getElementById("danger-alert").classList.add("d-none");
+                        document.getElementById("warning-alert").classList.add("d-none");
                     } else {
                         document.getElementById("warning-alert").classList.remove("d-none");
                         document.getElementById("success-alert").classList.add("d-none");
+                        document.getElementById("danger-alert").classList.add("d-none");
                     }
                 });
         }
@@ -66,27 +70,43 @@ try {
 
 //============== code for displaying and retrieving internet speed data ===========//
 
+let debug_output_string;
+
 let searchButton = document.getElementById("searchButton");
 try {
-    searchButton.addEventListener("click", ev => {
+    searchButton.addEventListener("click",() => {
         let zipcode = document.getElementById("zipCodeEntry").value;
-        get_coordinates(zipcode);
+        if (zipcode === ""){
+            document.getElementById("danger").classList.remove("d-none");
+            document.getElementById("success").classList.add("d-none");
+            document.getElementById("info").classList.add("d-none");
+        } else {
+            get_coordinates(zipcode);
+        }
     });
 } catch (e) {
 }
 
 
 function get_coordinates(zipcode) {
+    debug_output_string = "You entered: " + zipcode;
+    debugger;
     let public_key = "pk.eyJ1IjoiZXJpa2thbmRlcnNvbiIsImEiOiJjazMxdnNqcmMwZGgzM2JzNXF5ZnM3MHhlIn0.RhbHx-zoZopJ_Xwx9iDbog";
     let request_string = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + zipcode + ".json?access_token=" + public_key;
+    debugger;
     fetch(request_string)
         .then(function (response) {
             return response.json()
         })
         .then(function (data) {
+            debugger;
             let lat = data['features'][0]['center'][0];
             let long = data['features'][0]['center'][1];
             let coordinates = [lat, long];
+            debugger;
+            let placeName = data["features"][0]["place_name"];
+            debug_output_string = debug_output_string + "\n We found: " + placeName;
+            debug_output_string = debug_output_string + "\n coordinates: " + lat + ", " + long;
             get_blockcode(coordinates);
         });
 
@@ -95,23 +115,26 @@ function get_coordinates(zipcode) {
 
 
 function get_blockcode(coordinates) {
+    debugger;
     let lat = coordinates[0];
     let long = coordinates[1];
-    request_string = "https://geo.fcc.gov/api/census/block/find?longitude=" + lat + "&latitude=" + long + "&format=json&showall=false";
+    let request_string = "https://geo.fcc.gov/api/census/block/find?longitude=" + lat + "&latitude=" + long + "&format=json&showall=false";
     fetch(request_string)
         .then(function(response) {
             return response.json()
         })
         .then(function(data) {
             let blockcode = data['Block']['FIPS'];
-            // debugger;
+            debugger;
             get_fastest(blockcode)
         });
 }
 
 
 function get_fastest(blockcode) {
-    request_string = "https://opendata.fcc.gov/resource/ehbi-rr4z.json?blockcode=" + blockcode + "&consumer=1";
+    debug_output_string = debug_output_string + "\n census blockcode: " + blockcode;
+    debugger;
+    let request_string = "https://opendata.fcc.gov/resource/ehbi-rr4z.json?blockcode=" + blockcode + "&consumer=1";
     fetch(request_string)
         .then(function(response) {
             return response.json()
@@ -125,11 +148,51 @@ function get_fastest(blockcode) {
                 }
             }
             debugger;
+            debug_output_string = debug_output_string + "\n Fastest speed: " + fastest;
             displayResult(fastest);
-            debugger;
+
         });
 }
 
+
+
+
+
+
+
 function displayResult(fastest) {
-    document.getElementById("displayResult").innerText = fastest;
+    document.getElementById("success").classList.remove("d-none");
+    document.getElementById("danger").classList.add("d-none");
+    document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps";
+    document.getElementById("info").classList.add("d-none");
+    // click here for more details
+    // print debug output string
+    let infoBtn = document.getElementById("infoBtn");
+    infoBtn.addEventListener("click", ev => {
+        document.getElementById("info").classList.remove("d-none");
+        document.getElementById("displayAdditionalInfo").innerText = debug_output_string;
+    });
 }
+
+
+
+// function displayResult(fastest) {  // version 2
+//     document.getElementById("success").classList.remove("d-none");
+//     document.getElementById("danger").classList.add("d-none");
+//     document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps" + "\n" + debug_output_string;
+//     // click here for more details
+//     // print debug output string
+// }
+//
+
+
+
+
+
+
+// function displayResult(fastest) {   //version 1
+//     debug_output_string = debug_output_string + "\n fastest speed: " + fastest;
+//     debugger;
+//     document.getElementById("displayResult").innerText = debug_output_string;
+//     debugger;
+// }
