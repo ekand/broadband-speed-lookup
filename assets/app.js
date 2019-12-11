@@ -74,8 +74,9 @@ try {
         let zipcode = document.getElementById("zipCodeEntry").value;
         if (zipcode === ""){
             document.getElementById("danger").classList.remove("d-none");
-            document.getElementById("success").classList.add("d-none");}
-        else {
+            document.getElementById("success").classList.add("d-none");
+            document.getElementById("info").classList.add("d-none");
+        } else {
             get_coordinates(zipcode);
         }
     });
@@ -151,16 +152,41 @@ function get_fastest(blockcode) {
 
 
 
+
+
+
+
 function displayResult(fastest) {
     document.getElementById("success").classList.remove("d-none");
     document.getElementById("danger").classList.add("d-none");
-    document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps" + "\n" + debug_output_string;
+    document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps";
+    document.getElementById("info").classList.add("d-none");
     // click here for more details
     // print debug output string
+    let infoBtn = document.getElementById("infoBtn");
+    infoBtn.addEventListener("click", ev => {
+        document.getElementById("info").classList.remove("d-none");
+        document.getElementById("displayAdditionalInfo").innerText = debug_output_string;
+    });
 }
 
 
-// function displayResult(fastest) {
+
+// function displayResult(fastest) {  // version 2
+//     document.getElementById("success").classList.remove("d-none");
+//     document.getElementById("danger").classList.add("d-none");
+//     document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps" + "\n" + debug_output_string;
+//     // click here for more details
+//     // print debug output string
+// }
+//
+
+
+
+
+
+
+// function displayResult(fastest) {   //version 1
 //     debug_output_string = debug_output_string + "\n fastest speed: " + fastest;
 //     debugger;
 //     document.getElementById("displayResult").innerText = debug_output_string;
