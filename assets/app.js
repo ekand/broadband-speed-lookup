@@ -7,7 +7,7 @@
 // sources:
 // 1. https://jsfiddle.net/seamusleahy/rxeuaatw/
 // 2. https://www.geeksforgeeks.org/form-validation-using-html-javascript/
-let form = document.getElementById("contact")
+let form = document.getElementById("contact");
 try {
     // debugger;
     form.addEventListener('submit', e => {
@@ -19,20 +19,20 @@ try {
         let Phone = document.getElementById("Phone");
         let Comment = document.getElementById("Comment");
 
-        if (Name.value == "" || Address.value == "" || Email.value == "" || Phone.value == ""|| Comment.value == ""){
+        if (Name.value === "" || Address.value === "" || Email.value === "" || Phone.value === ""|| Comment.value === ""){
             document.getElementById("danger-alert").classList.remove("d-none");
 
         } else {
-            const form = document.getElementById("contact");
-            const method = form.getAttribute("method");
-            const action = form.getAttribute("action");
+            // const form = document.getElementById("contact");
+            // const method = form.getAttribute("method");
+            // const action = form.getAttribute("action");
             let formEl = document.getElementById('contact');
             let headers = new Headers();
 
             headers.set('Accept', 'application/json');
 
-            var formData = new FormData();
-            for (var i = 0; i < formEl.length; ++i) {
+            let formData = new FormData();
+            for (let i = 0; i < formEl.length; ++i) {
                 formData.append(formEl[i].name, formEl[i].value);
             }
             formData.append('json', JSON.stringify({example: 'return value'}));
@@ -70,7 +70,7 @@ let debug_output_string;
 
 let searchButton = document.getElementById("searchButton");
 try {
-    searchButton.addEventListener("click", ev => {
+    searchButton.addEventListener("click",() => {
         let zipcode = document.getElementById("zipCodeEntry").value;
         if (zipcode === ""){
             document.getElementById("danger").classList.remove("d-none");
@@ -110,11 +110,10 @@ function get_coordinates(zipcode) {
 
 
 function get_blockcode(coordinates) {
-
     debugger;
     let lat = coordinates[0];
     let long = coordinates[1];
-    request_string = "https://geo.fcc.gov/api/census/block/find?longitude=" + lat + "&latitude=" + long + "&format=json&showall=false";
+    let request_string = "https://geo.fcc.gov/api/census/block/find?longitude=" + lat + "&latitude=" + long + "&format=json&showall=false";
     fetch(request_string)
         .then(function(response) {
             return response.json()
@@ -130,7 +129,7 @@ function get_blockcode(coordinates) {
 function get_fastest(blockcode) {
     debug_output_string = debug_output_string + "\n census blockcode: " + blockcode;
     debugger;
-    request_string = "https://opendata.fcc.gov/resource/ehbi-rr4z.json?blockcode=" + blockcode + "&consumer=1";
+    let request_string = "https://opendata.fcc.gov/resource/ehbi-rr4z.json?blockcode=" + blockcode + "&consumer=1";
     fetch(request_string)
         .then(function(response) {
             return response.json()
