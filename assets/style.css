@@ -2,12 +2,30 @@
  * Globals
  */
 
+
+
+
+
 /* Links */
 a,
 a:focus,
 a:hover {
     color: #fff;
 }
+
+.make-dark-text {
+    color: #000000;
+}
+
+.jumbotron {
+    background-color: #777777;
+}
+
+.alert {
+    margin-top: 10px;
+}
+
+
 
 /* Custom default button */
 .btn-secondary,
