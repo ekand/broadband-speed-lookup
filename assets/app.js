@@ -1,6 +1,6 @@
 // debugger;
 
-let debug_output_string;
+
 
 //==============form submission code==================//
 
@@ -66,6 +66,8 @@ try {
 
 //============== code for displaying and retrieving internet speed data ===========//
 
+let debug_output_string;
+
 let searchButton = document.getElementById("searchButton");
 try {
     searchButton.addEventListener("click", ev => {
@@ -82,7 +84,7 @@ try {
 
 
 function get_coordinates(zipcode) {
-    debug_output_string = "\n you entered: " + zipcode;
+    debug_output_string = "You entered: " + zipcode;
     debugger;
     let public_key = "pk.eyJ1IjoiZXJpa2thbmRlcnNvbiIsImEiOiJjazMxdnNqcmMwZGgzM2JzNXF5ZnM3MHhlIn0.RhbHx-zoZopJ_Xwx9iDbog";
     let request_string = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + zipcode + ".json?access_token=" + public_key;
@@ -97,6 +99,9 @@ function get_coordinates(zipcode) {
             let long = data['features'][0]['center'][1];
             let coordinates = [lat, long];
             debugger;
+            let placeName = data["features"][0]["place_name"];
+            debug_output_string = debug_output_string + "\n We found: " + placeName;
+            debug_output_string = debug_output_string + "\n coordinates: " + lat + ", " + long;
             get_blockcode(coordinates);
         });
 
@@ -105,7 +110,7 @@ function get_coordinates(zipcode) {
 
 
 function get_blockcode(coordinates) {
-    debug_output_string = debug_output_string + "\n coordinates: " + coordinates;
+
     debugger;
     let lat = coordinates[0];
     let long = coordinates[1];
@@ -139,6 +144,7 @@ function get_fastest(blockcode) {
                 }
             }
             debugger;
+            debug_output_string = debug_output_string + "\n Fastest speed: " + fastest;
             displayResult(fastest);
 
         });
@@ -149,7 +155,7 @@ function get_fastest(blockcode) {
 function displayResult(fastest) {
     document.getElementById("success").classList.remove("d-none");
     document.getElementById("danger").classList.add("d-none");
-    document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps";
+    document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps" + "\n" + debug_output_string;
     // click here for more details
     // print debug output string
 }
