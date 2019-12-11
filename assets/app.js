@@ -1,6 +1,6 @@
 // debugger;
 
-
+let debug_output_string;
 
 //==============form submission code==================//
 
@@ -70,23 +70,33 @@ let searchButton = document.getElementById("searchButton");
 try {
     searchButton.addEventListener("click", ev => {
         let zipcode = document.getElementById("zipCodeEntry").value;
-        get_coordinates(zipcode);
+        if (zipcode === ""){
+            document.getElementById("danger").classList.remove("d-none");
+            document.getElementById("success").classList.add("d-none");}
+        else {
+            get_coordinates(zipcode);
+        }
     });
 } catch (e) {
 }
 
 
 function get_coordinates(zipcode) {
+    debug_output_string = "\n you entered: " + zipcode;
+    debugger;
     let public_key = "pk.eyJ1IjoiZXJpa2thbmRlcnNvbiIsImEiOiJjazMxdnNqcmMwZGgzM2JzNXF5ZnM3MHhlIn0.RhbHx-zoZopJ_Xwx9iDbog";
     let request_string = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + zipcode + ".json?access_token=" + public_key;
+    debugger;
     fetch(request_string)
         .then(function (response) {
             return response.json()
         })
         .then(function (data) {
+            debugger;
             let lat = data['features'][0]['center'][0];
             let long = data['features'][0]['center'][1];
             let coordinates = [lat, long];
+            debugger;
             get_blockcode(coordinates);
         });
 
@@ -95,6 +105,8 @@ function get_coordinates(zipcode) {
 
 
 function get_blockcode(coordinates) {
+    debug_output_string = debug_output_string + "\n coordinates: " + coordinates;
+    debugger;
     let lat = coordinates[0];
     let long = coordinates[1];
     request_string = "https://geo.fcc.gov/api/census/block/find?longitude=" + lat + "&latitude=" + long + "&format=json&showall=false";
@@ -104,13 +116,15 @@ function get_blockcode(coordinates) {
         })
         .then(function(data) {
             let blockcode = data['Block']['FIPS'];
-            // debugger;
+            debugger;
             get_fastest(blockcode)
         });
 }
 
 
 function get_fastest(blockcode) {
+    debug_output_string = debug_output_string + "\n census blockcode: " + blockcode;
+    debugger;
     request_string = "https://opendata.fcc.gov/resource/ehbi-rr4z.json?blockcode=" + blockcode + "&consumer=1";
     fetch(request_string)
         .then(function(response) {
@@ -126,10 +140,18 @@ function get_fastest(blockcode) {
             }
             debugger;
             displayResult(fastest);
-            debugger;
+
         });
 }
 
+
+
+
+
+
 function displayResult(fastest) {
-    document.getElementById("displayResult").innerText = fastest;
+    debug_output_string = debug_output_string + "\n fastest speed: " + fastest;
+    debugger;
+    document.getElementById("displayResult").innerText = debug_output_string;
+    debugger;
 }
