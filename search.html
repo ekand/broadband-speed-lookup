@@ -69,18 +69,21 @@
 
 
 
-
     <div class="input-group mb-3">
         <input type="text" id="zipCodeEntry" class="form-control" placeholder="Enter your Zip Code" aria-label="Enter your Zip Code" aria-describedby="basic-addon2">
         <div class="input-group-append">
             <a class="btn btn-outline-secondary"  id = "searchButton" role="button">Search </a>
-<!--            href="searchResults.html"  -->
+        </div>
+        <div class="container alerts">
+            <div class="alert alert-success d-none" id="success" role="alert">
+                <p></p>
+                <p id="displayResult"></p>
+            </div>
+            <div class="alert alert-danger d-none" id="danger" role="alert">
+                Please enter a zip code
+            </div>
         </div>
     </div>
-
-    <p id="displayResult"></p>
-
-
 
 
 

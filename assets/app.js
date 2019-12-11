@@ -146,12 +146,18 @@ function get_fastest(blockcode) {
 
 
 
-
-
-
 function displayResult(fastest) {
-    debug_output_string = debug_output_string + "\n fastest speed: " + fastest;
-    debugger;
-    document.getElementById("displayResult").innerText = debug_output_string;
-    debugger;
+    document.getElementById("success").classList.remove("d-none");
+    document.getElementById("danger").classList.add("d-none");
+    document.getElementById("displayResult").innerText = "The fastest available broadband speed in your area is " + fastest + " Mbps";
+    // click here for more details
+    // print debug output string
 }
+
+
+// function displayResult(fastest) {
+//     debug_output_string = debug_output_string + "\n fastest speed: " + fastest;
+//     debugger;
+//     document.getElementById("displayResult").innerText = debug_output_string;
+//     debugger;
+// }
