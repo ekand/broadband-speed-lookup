@@ -4,7 +4,9 @@ Contributors: Adam Gene Regnier, Erik Kristofer Anderson
 
 What it does: A user can look up an address or zip code in the US, and find out the fastest available consumer fixed broadband internet.
 
-How it works: A user enters a zipcode or address. This gets sent to a mapbox API which returns a place name and coordinates. Then these coordinates get sent to an FCC API which returns a cencsus block code. That census block code gets sent to another FCC API, which returns a list of entries, each representing an internet service available in that location. The fastest of these numbers gets displayed to the user.  
+The live site is available here: [https://erik-kristofer-anderson.github.io/speedforcepath/](https://erik-kristofer-anderson.github.io/speedforcepath/)
+
+How it works: A user enters a zipcode or address. This gets sent to a mapbox API which returns a place name and coordinates. Then these coordinates get sent to an FCC API which returns a census block code. That census block code gets sent to another FCC API, which returns a list of entries, each representing an internet service available in that location. The fastest of these numbers gets displayed to the user.  
 If the user then clicks "additional information," the page displays the original search entry, the found place name and coordinates, the found census block code, and the found and calculated maximum available speed.
 
 Sources (Also cited in source code):
