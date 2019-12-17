@@ -2,6 +2,8 @@ The purpose of this website is to interpret and display internet connectivity da
 
 Contributors: Adam Gene Regnier, Erik Kristofer Anderson
 
+The live website is available here: [https://erik-kristofer-anderson.github.io/speedforcepath/](https://erik-kristofer-anderson.github.io/speedforcepath/)
+
 What it does: A user can look up an address or zip code in the US, and find out the fastest available consumer fixed broadband internet.
 
 How it works: A user enters a zipcode or address. This gets sent to a mapbox API which returns a place name and coordinates. Then these coordinates get sent to an FCC API which returns a cencsus block code. That census block code gets sent to another FCC API, which returns a list of entries, each representing an internet service available in that location. The fastest of these numbers gets displayed to the user.  
