@@ -2,7 +2,7 @@ The purpose of this website is to interpret and display internet connectivity da
 
 Contributors: Adam Gene Regnier, Erik Kristofer Anderson
 
-The live website is available here: [https://ekand.github.io/speedforcepath/](https://ekand.github.io/speedforcepath/)
+The live website is available here: [https://ekand.github.io/broadband-speed-lookup/](https://ekand.github.io/broadband-speed-lookup/)
 
 What it does: A user can look up an address or zip code in the US, and find out the fastest available consumer fixed broadband internet.
 
